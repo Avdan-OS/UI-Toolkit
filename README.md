@@ -10,3 +10,13 @@ Currently it supports only one key from config that is window-background-color.
 1. Only works for me because of my username, you have to change it
 2. Only one key is accessible
 3. Needs to restart when theme is changed
+
+# Config File
+It's a json file. It should be present at `/home/`[username 'only yegender works for now by defaukt']`/.config/aos/config/theme/main.json`
+
+# Sample Config
+```
+{
+        "window-background-color":"#00000000"
+}
+```
