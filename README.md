@@ -17,6 +17,14 @@ It's a json file. It should be present at `/home/`[username 'only yegender works
 # Sample Config
 ```
 {
-        "window-background-color":"#00000000"
+        "window-background-color":"#88000000",
+        "button-background-color":"#22ffffff",
+        "button-background-color::hover":"#33000000",
+        "button-foreground-color":"#ffffff",
+        "button-corner-radius":5,
+        "button-padding":10,
+        "button-font-pixel-size":17,
+        "button-padding-vertical":0,
+        "button-padding-horizontal":50
 }
 ```
