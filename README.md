@@ -1,4 +1,4 @@
-# Important: we are migrating to a new Discord server https://discord.gg/gRCcCUZ5px
+# Important: we are migrating to a new Discord server [.gg/avdanos](https://discord.gg/avdanos)
 
 # avdan-qml-toolkit
 Avdan OS UI Toolkit(Just a QML Library or Module)
