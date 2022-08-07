@@ -1,0 +1,14 @@
+[package]
+
+name = "ui-toolkit"
+description = "AvdanOS UI toolkit"
+documentation = "https://docs.avdanos.com/"
+homepage = "https://avdanos.com/"
+license = "GPL-3.0"
+version = "0.0.1"
+author = "Akane <akane6704@protonmail.com>"
+edition = "2021"
+
+[dependencies]
+
+eframe = "0.18.0"
