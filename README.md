@@ -2,4 +2,4 @@
 AvdanOS UI Toolkit made with egui
 
 ## Screenshots
-[Screenshot1](screenshot.png)
+![Screenshot1](screenshot.png)
