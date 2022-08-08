@@ -2,14 +2,6 @@ use eframe::egui;
 
 use crate::fonts::setup_font;
 
-/*
- * #[derive(PartialEq)]
- * enum ColorStyle {
- *     LightMode,
- *     DarkMode
- * }
- */
-
 #[derive(Default)]
 pub struct UIToolkit {}
 
