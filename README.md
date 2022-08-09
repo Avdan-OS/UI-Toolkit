@@ -1,33 +1,26 @@
-# Important: we are migrating to a new Discord server [.gg/avdanos](https://discord.gg/avdanos)
+# UI-Toolkit
+AvdanOS UI Toolkit made with egui
 
-# avdan-qml-toolkit
-Avdan OS UI Toolkit(Just a QML Library or Module)
+## Screenshots
+Light Mode
+![Screenshot1](screenshots/light.png)
 
-# Theme Parser Engine
-This thing will read user theme config file. So, that if a user changes the config file then everyapp use config got theme update
+Dark Mode
+![Screenshot1](screenshots/dark.png)
 
-Currently it supports only one key from config that is window-background-color.
+## How to use this
+### Step 1: Setup
+On debian-based linux distros run this command on the terminal:
 
-## Known Bugs of Theme Parser Engine
-1. Only works for me because of my username, you have to change it
-2. Only one key is accessible
-3. Needs to restart when theme is changed
+```sudo apt-get install -y libclang-dev libgtk-3-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libspeechd-dev libxkbcommon-dev libssl-dev```
 
-# Config File
-It's a json file. It should be present at `/home/`[username 'only yegender works for now by defaukt']`/.config/aos/config/theme/main.json`
+Meanwhile on fedora-based distros you need to run this command:
 
-# Sample Config
-```
-{
-        "window-background-color": "#88000000",
-        "button-background-color": "#22ffffff",
-        "button-background-color::hover":" #33000000",
-        "button-background-color::pressed":" #80000000",
-        "button-foreground-color": "#ffffff",
-        "button-corner-radius": 5,
-        "button-padding": 10,
-        "button-font-pixel-size": 17,
-        "button-padding-vertical": 0,
-        "button-padding-horizontal": 50
-}
-```
+```sudo dnf install clang clang-devel clang-tools-extra speech-dispatcher-devel libxkbcommon-devel pkg-config openssl-devel libxcb-devel```
+
+### Step 2: Building and running
+1. Clone this repository(`git clone https://github.com/Avdan-OS/UI-Toolkit.git`)
+
+2. Build the cloned repo(`cd UI-Toolkit && cargo run`)
+
+3. You're done!
