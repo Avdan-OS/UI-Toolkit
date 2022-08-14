@@ -1,5 +1,6 @@
 use eframe::egui;
 
+use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 #[derive(Default)]
@@ -17,13 +18,13 @@ impl eframe::App for UIToolkit {
     fn update(&mut self,
             ctx:    &egui::Context,
             _frame: &mut eframe::Frame) {
-        egui::CentralPanel::default().show(ctx, |ui| {
+        egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
             ui.heading("AvdanOS UI Toolkit");
             ui.end_row();
 
             ui.separator();
 
-            ui.horizontal(|ui| {
+            ui.horizontal(|ui: &mut Ui| {
                 ui.label("Label: ");
                 ui.label("Hello, World!");
             });
@@ -31,7 +32,7 @@ impl eframe::App for UIToolkit {
             
             ui.separator();
 
-            ui.horizontal(|ui| {
+            ui.horizontal(|ui: &mut Ui| {
                 ui.label("Button: ");
                 if ui.add(egui::Button::new("Dark mode!")).clicked() {
                     ctx.set_visuals(egui::Visuals::dark());

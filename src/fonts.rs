@@ -1,7 +1,7 @@
-use eframe::egui;
+use eframe::egui::{self, FontDefinitions};
 
 pub fn setup_font(ctx: &egui::Context) {
-    let mut font = egui::FontDefinitions::default();
+    let mut font: FontDefinitions = egui::FontDefinitions::default();
 
     font.font_data.insert (
         "inter".to_owned(),
