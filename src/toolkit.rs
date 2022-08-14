@@ -1,5 +1,6 @@
 use eframe::egui;
 
+use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 #[derive(Default)]
