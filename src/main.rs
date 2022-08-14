@@ -5,11 +5,11 @@ mod fonts;
 mod toolkit;
 
 fn main() {
-    let native_options = eframe::NativeOptions::default();
+    let native_options: NativeOptions = eframe::NativeOptions::default();
 
     eframe::run_native (
         "AvdanOS toolkit",
         native_options,
-        Box::new(|cc| Box::new(toolkit::UIToolkit::new(cc)))
+        Box::new(|cc: &CreationContext| Box::new(toolkit::UIToolkit::new(cc)))
     );
 }
