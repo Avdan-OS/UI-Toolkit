@@ -19,7 +19,7 @@ impl eframe::App for UIToolkitDemo {
             ctx:    &egui::Context,
             _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
-            ui.heading("AvdanOS UI Toolkit Demo");
+            ui.heading(r#"AvdanOS UI Toolkit Demo"#);
             ui.end_row();
 
             ui.separator();
