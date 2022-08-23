@@ -1,5 +1,6 @@
 #![allow(unused_imports)]
 use eframe::*;
+use toolkit::UIToolkitDemo;
 
 mod fonts;
 mod toolkit;
@@ -10,6 +11,6 @@ fn main() {
     eframe::run_native (
         "AvdanOS toolkit",
         native_options,
-        Box::new(|cc: &CreationContext| Box::new(toolkit::UIToolkitDemo::new(cc)))
+        Box::new(|cc: &CreationContext| Box::new(UIToolkitDemo::new(cc)))
     );
 }
