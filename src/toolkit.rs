@@ -15,14 +15,12 @@ impl UIToolkitDemo {
 }
 
 impl eframe::App for UIToolkitDemo {
-    fn update(&mut self,
-            ctx:    &egui::Context,
-            _frame: &mut eframe::Frame) {
+    fn update(&mut self, ctx:    &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
             ui.heading(r#"AvdanOS UI Toolkit Demo"#);
             ui.end_row();
 
-            ui.separator(); // visual separator (here it's a vertical line)
+            ui.hyperlink("https://github.com/Avdan-OS");
 
             ui.horizontal(|ui: &mut Ui| {
                 ui.label("Label: ");
@@ -32,19 +30,45 @@ impl eframe::App for UIToolkitDemo {
             
             ui.separator();
 
-            ui.horizontal(|ui: &mut Ui| {
-                ui.label("Button: ");
+            ui.horizontal(|ui: &mut Ui| { // buttons
+                ui.label("Buttons: ");
                 if ui.add(egui::Button::new("Dark mode!")).clicked() {
                     ctx.set_visuals(egui::Visuals::dark());
                 }
                 if ui.add(egui::Button::new("Light mode!")).clicked() {
                     ctx.set_visuals(egui::Visuals::light());
                 }
+            }); // buttons
+
+            ui.horizontal(|ui: &mut Ui| { // sliders 
+                ui.label("Sliders :");
+                ui.label("AvdanOS Coolness : ");
+                ui.add(egui::Slider::new(&mut 0, 0..=1000),);
+                ui.label("Rust Coolness");
+                ui.add(egui::Slider::new(&mut 0, 0..=1000));
+            }); // sliders 
+
+            ui.horizontal(|ui: &mut Ui| { // checkboxes
+                ui.label("Checkboxes :");
+                ui.checkbox(&mut true, "AvdanOS is cool !");
+                ui.checkbox(&mut true, "We need more developers !");
+            }); // sliders
+
+            ui.horizontal(|ui: &mut Ui| { // drag values
+                ui.label("Dragvalue :");
+                ui.add(egui::DragValue::new(&mut 100));
+                ui.add(egui::DragValue::new(&mut 100));
+            }); // drag values
+
+            ui.separator();
+
+            ui.collapsing("Click to see what is hidden!", |ui| {
+                ui.label("Not much, as it turns out");
             });
         });
     }
 
-    fn save(self: &mut UIToolkitDemo, _storage: &mut dyn eframe::Storage) {}
+    fn save(&mut self, _storage: &mut dyn eframe::Storage) {}
 
     fn on_exit_event(&mut self) -> bool {
         true
@@ -79,5 +103,5 @@ impl eframe::App for UIToolkitDemo {
 
     fn warm_up_enabled(&self) -> bool {
         false
-    }
+    } // central panel
 }
