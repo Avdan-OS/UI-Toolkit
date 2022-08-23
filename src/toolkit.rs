@@ -4,9 +4,9 @@ use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 #[derive(Default)]
-pub struct UIToolkit {}
+pub struct UIToolkitDemo;
 
-impl UIToolkit {
+impl UIToolkitDemo {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         setup_font(&cc.egui_ctx);
 
@@ -14,12 +14,12 @@ impl UIToolkit {
     }
 }
 
-impl eframe::App for UIToolkit {
+impl eframe::App for UIToolkitDemo {
     fn update(&mut self,
             ctx:    &egui::Context,
             _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
-            ui.heading("AvdanOS UI Toolkit");
+            ui.heading("AvdanOS UI Toolkit Demo");
             ui.end_row();
 
             ui.separator();
