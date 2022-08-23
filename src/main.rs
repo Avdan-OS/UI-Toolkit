@@ -10,6 +10,6 @@ fn main() {
     eframe::run_native (
         "AvdanOS toolkit",
         native_options,
-        Box::new(|cc: &CreationContext| Box::new(toolkit::UIToolkit::new(cc)))
+        Box::new(|cc: &CreationContext| Box::new(toolkit::UIToolkitDemo::new(cc)))
     );
 }
