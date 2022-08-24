@@ -1,6 +1,7 @@
-use eframe::egui;
+use eframe::egui::{self, Response};
 use eframe::egui::special_emojis::GITHUB;
 use eframe::egui::style::WidgetVisuals;
+use egui::plot::{Line, Plot, Value, Values};
 
 use crate::egui::Ui;
 use crate::fonts::setup_font;
@@ -77,6 +78,19 @@ fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget
     }
 }
 
+fn example_plot(ui: &mut egui::Ui) -> egui::Response {
+    use egui::plot::{Line, Plot, Value, Values};
+    let sin = (0..1000).map(|i| {
+        let x = i as f64 * 0.01;
+        Value::new(x, x.sin())
+    });
+    let line = Line::new(Values::from_values_iter(sin));
+
+    Plot::new("my_plot")
+        .view_aspect(2.0)
+        .show(ui, |plot_ui| plot_ui.line(line))
+        .response
+}
 impl eframe::App for UIToolkitDemo {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
@@ -113,6 +127,14 @@ impl eframe::App for UIToolkitDemo {
                 }
             }); // light mode and dark mode buttons
 
+            ui.add(doc_link_label("Slider", "Slider"));
+            ui.add(egui::Slider::new(&mut self.scalar, 0.0..=360.0).suffix("°"));
+            ui.end_row();
+
+            ui.add(doc_link_label("DragValue", "DragValue"));
+            ui.add(egui::DragValue::new(&mut self.scalar).speed(1.0));
+            ui.end_row();
+
             ui.add(doc_link_label(
                 "SelectableLabel",
                 "selectable_value, SelectableLabel",
@@ -142,19 +164,26 @@ impl eframe::App for UIToolkitDemo {
                     ui.add(egui::Spinner::new());
                 });
             });
-            ui.end_row();
+            ui.end_row();?
+
+            ui.separator();
+
+            example_plot(ui);
 
             ui.separator();
 
             ui.add(doc_link_label("ProgressBar", "ProgressBar"));
+            
             let progress = self.scalar / 360.0;
             let progress_bar = egui::ProgressBar::new(progress)
                 .show_percentage()
                 .animate(self.animate_progress_bar);
+            
             self.animate_progress_bar = ui
                 .add(progress_bar)
                 .on_hover_text("The progress bar can be animated!")
                 .hovered();
+
             ui.end_row();
             }); // central panel
     }
