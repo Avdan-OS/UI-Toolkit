@@ -24,3 +24,6 @@ Meanwhile on fedora-based distros you need to run this command:
 2. Build the cloned repo(`cd UI-Toolkit && cargo run`)
 
 3. You're done!
+
+### Useful Resources 
+Explore the different eGUI Widgets : `https://www.egui.rs/index.html#demo`

@@ -18,7 +18,7 @@ impl UIToolkitDemo {
 impl eframe::App for UIToolkitDemo {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
-            ui.heading(r#"AvdanOS UI Toolkit Demo"#);
+            ui.heading("AvdanOS UI Toolkit Demo");
             ui.end_row();
             
             ui.horizontal(|ui: &mut Ui| {
@@ -30,7 +30,8 @@ impl eframe::App for UIToolkitDemo {
             
             ui.separator();
 
-            ui.collapsing("Click to see buttons !", |ui| { // buttons
+            ui.horizontal(|ui| { // buttons
+                ui.label("Dark mode or Light mode ?!");
                 if ui.add(egui::Button::new("Dark mode!")).clicked() {
                     ctx.set_visuals(egui::Visuals::dark());
                 }
@@ -56,13 +57,12 @@ impl eframe::App for UIToolkitDemo {
                 ui.add(egui::DragValue::new(&mut 1).speed(0.1));
                 ui.add(egui::DragValue::new(&mut 10).speed(1.5));
             }); // drag values
-
             
             ui.collapsing("Click to see what is hidden!", |ui| { // hidden thing
                 ui.label("Not much, as it turns out");
             }); // hidden thing
             
-            ui.collapsing("Counting Thing!", |ui| {
+            ui.collapsing("Counting Thing!", |ui| { // counting thing
                 let counter = &mut 1;
                 ui.label("Count and stuff :");
                 ui.horizontal(|ui| {
@@ -74,11 +74,12 @@ impl eframe::App for UIToolkitDemo {
                         *counter += 1;
                     }
                 }); // ui horizontal
-            }); // ui collapsing
+            }); // counting thing
             ui.separator();
         }); // central panel
     }
-    // those are the default members don't touch them (they're pretty much helper functions so)
+
+    // those are the default members don't touch them (they're pretty much helper functions so yeah)
     fn save(&mut self, _storage: &mut dyn eframe::Storage) {}
 
     fn on_exit_event(&mut self) -> bool {
