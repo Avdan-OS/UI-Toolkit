@@ -15,7 +15,6 @@ pub struct UIToolkitDemo{
 impl UIToolkitDemo {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         setup_font(&cc.egui_ctx);
-
         Self::default()
     }
 }
@@ -65,7 +64,8 @@ impl Default for WidgetGallery {
     }
 }
 
-fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget + 'a { // 
+fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget + 'a {
+    // hyperlink label helper function
     let label = format!("{}:", title);
     let url = format!("https://docs.rs/egui?search={}", search_term);
     move |ui: &mut egui::Ui| {
@@ -78,7 +78,7 @@ fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget
     }
 }
 
-fn example_plot(ui: &mut egui::Ui) -> egui::Response {
+fn example_plot(ui: &mut egui::Ui) -> egui::Response { // the sine plotting function 
     use egui::plot::{Line, Plot, Value, Values};
     let sin = (0..1000).map(|i| {
         let x = i as f64 * 0.01;
@@ -86,8 +86,9 @@ fn example_plot(ui: &mut egui::Ui) -> egui::Response {
     });
     let line = Line::new(Values::from_values_iter(sin));
 
-    Plot::new("my_plot")
-        .view_aspect(2.0)
+    Plot::new("plot")
+        .view_aspect(1.0)
+        .height(45.0)
         .show(ui, |plot_ui| plot_ui.line(line))
         .response
 }
@@ -110,7 +111,7 @@ impl eframe::App for UIToolkitDemo {
             });
 
             ui.end_row();
-            let mut string = "";
+            let mut string:String = "".to_string();
             ui.add(egui::TextEdit::singleline(&mut string).hint_text("Write something here"));
 
             ui.end_row();
@@ -164,27 +165,28 @@ impl eframe::App for UIToolkitDemo {
                     ui.add(egui::Spinner::new());
                 });
             });
-            ui.end_row();?
+            ui.end_row();
 
             ui.separator();
 
-            example_plot(ui);
-
+            
             ui.separator();
-
+            
             ui.add(doc_link_label("ProgressBar", "ProgressBar"));
             
             let progress = self.scalar / 360.0;
             let progress_bar = egui::ProgressBar::new(progress)
-                .show_percentage()
-                .animate(self.animate_progress_bar);
+            .show_percentage()
+            .animate(self.animate_progress_bar);
             
             self.animate_progress_bar = ui
-                .add(progress_bar)
-                .on_hover_text("The progress bar can be animated!")
-                .hovered();
-
+            .add(progress_bar)
+            .on_hover_text("The progress bar can be animated!")
+            .hovered();
+            
             ui.end_row();
+
+            example_plot(ui); // the plot 
             }); // central panel
     }
 }
