@@ -1,4 +1,4 @@
-use eframe::egui::{self, FontDefinitions};
+pub(crate) use eframe::egui::{self, FontDefinitions};
 
 pub fn setup_font(ctx: &egui::Context) {
     let mut font: FontDefinitions = egui::FontDefinitions::default();
