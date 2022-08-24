@@ -12,3 +12,4 @@ edition = "2021"
 [dependencies]
 
 eframe = "0.18.0"
+chrono = "0.4"
