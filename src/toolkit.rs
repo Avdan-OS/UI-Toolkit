@@ -6,6 +6,7 @@ use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 #[derive(Default)]
+
 pub struct UIToolkitDemo{
     boolean: bool,
     radio: Enum,
@@ -22,6 +23,7 @@ impl UIToolkitDemo {
         Self::default()
     }
 }
+
 
 #[derive(Debug, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
@@ -97,12 +99,39 @@ impl eframe::App for UIToolkitDemo {
             // light mode and dark mode buttons
             ui.horizontal(|ui| { 
                 ui.label("Dark mode or Light mode ?!");
+
                 if ui.add(egui::Button::new("Dark mode!")).clicked() {
                     ctx.set_visuals(egui::Visuals::dark());
                 }
                 if ui.add(egui::Button::new("Light mode!")).clicked() {
                     ctx.set_visuals(egui::Visuals::light());
                 }
+            }); // buttons
+
+            ui.horizontal(|ui: &mut Ui| { // sliders 
+                ui.label("Sliders :");
+                ui.label("AvdanOS Coolness : ");
+                ui.add(egui::Slider::new(&mut 0, 0..=1000),);
+                ui.label("Rust Coolness");
+                ui.add(egui::Slider::new(&mut 0, 0..=1000));
+            }); // sliders 
+
+            ui.horizontal(|ui: &mut Ui| { // checkboxes
+                ui.label("Checkboxes :");
+                ui.checkbox(&mut true, "AvdanOS is cool !");
+                ui.checkbox(&mut true, "We need more developers !");
+            }); // sliders
+
+            ui.horizontal(|ui: &mut Ui| { // drag values
+                ui.label("Dragvalue :");
+                ui.add(egui::DragValue::new(&mut 100));
+                ui.add(egui::DragValue::new(&mut 100));
+            }); // drag values
+
+            ui.separator();
+
+            ui.collapsing("Click to see what is hidden!", |ui| {
+                ui.label("Not much, as it turns out");
             });
             ui.end_row();
 
