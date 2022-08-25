@@ -1,31 +1,19 @@
 use eframe::egui::{self, Response, Widget};
 use eframe::egui::special_emojis::GITHUB;
 use eframe::egui::style::WidgetVisuals;
-use egui::plot::*;
 use egui_extras;
-
 
 use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 #[derive(Default)]
 pub struct UIToolkitDemo{
-    enabled: bool,
-    visible: bool,
     boolean: bool,
     radio: Enum,
     scalar: f32,
-    string: String,
     color: egui::Color32,
     animate_progress_bar: bool,
     text_input:String, 
-
-    #[cfg(feature = "chrono")]
-    #[cfg_attr(feature = "serde", serde(skip))]
-    date: Option<chrono::Date<chrono::Utc>>,
-
-    #[cfg_attr(feature = "serde", serde(skip))]
-    texture: Option<egui::TextureHandle>,
 }
 
 
