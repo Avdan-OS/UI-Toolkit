@@ -1,15 +1,17 @@
 [package]
 
 name = "ui-toolkit"
-description = "AvdanOS UI toolkit"
+description = "AvdanOS UI Toolkit"
 documentation = "https://docs.avdanos.com/"
 homepage = "https://avdanos.com/"
 license = "GPL-3.0"
 version = "0.0.1"
 author = "Akane <akane6704@protonmail.com>"
 edition = "2021"
+features = ["chrono", "datepicker"]
 
 [dependencies]
 
-eframe = "0.18.0"
-chrono = "0.4"
+eframe = "0.19.0"
+egui_extras = { version = "0.19.0", features = ["datepicker"] }
+chrono = "0.4.0"
