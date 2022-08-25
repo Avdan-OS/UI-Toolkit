@@ -21,10 +21,12 @@ The eGUI Widgets that have been shown in this little demo are :
 
 ## Screenshots
 
-- Light Mode
+### Light Mode
+
 ![Screenshot1](screenshots/avdanOS_UIToolkit_Demo_screenshot_lightmode.png)
 
-- Dark Mode
+### Dark mode
+
 ![Screenshot1](screenshots/avdanOS_UIToolkit_Demo_screenshot_darkmode.png)
 
 ## How to use this
