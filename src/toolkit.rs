@@ -25,12 +25,16 @@ impl UIToolkitDemo {
 
 #[derive(Debug, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
-#[derive(Default)]
 enum Enum {
-    #[default]
     First,
     Second,
     Third,
+}
+
+impl Default for Enum {
+    fn default() -> Self {
+        Self::First
+    }
 }
 pub struct WidgetGallery {
     enabled: bool,
