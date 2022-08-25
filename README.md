@@ -1,14 +1,31 @@
 # UI-Toolkit
 
-AvdanOS UI Toolkit made with egui
+AvdanOS UI Toolkit made with Rust using the eGUI Library.
+`https://github.com/emilk/egui`
+
+The eGUI Widgets that have been shown in this little demo are :
+- Labels
+- Buttons
+- Separators
+- End_rows
+- TextEdit boxes
+- Sliders
+- Drag values
+- Progress bars
+- ColorPickers
+- Checkboxes
+- Radio buttons
+- Selectable Labels
+- ComboBoxes
+- Collapsing Headers + a Spinner
 
 ## Screenshots
 
-Light Mode
-![Screenshot1](screenshots/light.png)
+- Light Mode
+![Screenshot1](screenshots/avdanOS_UIToolkit_Demo_screenshot_lightmode.png)
 
-Dark Mode
-![Screenshot1](screenshots/dark.png)
+- Dark Mode
+![Screenshot1](screenshots/avdanOS_UIToolkit_Demo_screenshot_darkmode.png)
 
 ## How to use this
 

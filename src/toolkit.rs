@@ -1,7 +1,6 @@
 use eframe::egui::{self, Response, Widget};
 use eframe::egui::special_emojis::GITHUB;
 use eframe::egui::style::WidgetVisuals;
-use egui_extras;
 
 use crate::egui::Ui;
 use crate::fonts::setup_font;
@@ -103,7 +102,7 @@ impl eframe::App for UIToolkitDemo {
             });
             ui.end_row();
 
-            // Input box
+            // Text input box
             ui.add(egui::TextEdit::singleline(&mut self.text_input).hint_text("Write something here"));
             ui.end_row();
             
@@ -133,13 +132,6 @@ impl eframe::App for UIToolkitDemo {
             // Color Picker
             ui.add(doc_link_label("Color picker", "color_edit"));
             ui.color_edit_button_srgba(&mut self.color);
-            ui.end_row();
-
-            // "Click me !" Button
-            ui.add(doc_link_label("Link", "link"));
-            if ui.link("Click me!").clicked() {
-                *&mut self.boolean = !*&mut self.boolean;
-            }
             ui.end_row();
 
             // Checkbox
