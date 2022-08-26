@@ -5,17 +5,17 @@ use eframe::egui::style::WidgetVisuals;
 use crate::egui::Ui;
 use crate::fonts::setup_font;
 
-#[derive(Default)]
-
 pub struct UIToolkitDemo{
+    enabled: bool,
+    visible: bool,
     boolean: bool,
     radio: Enum,
     scalar: f32,
+    string: String,
     color: egui::Color32,
     animate_progress_bar: bool,
     text_input:String, 
 }
-
 
 impl UIToolkitDemo {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
@@ -23,7 +23,6 @@ impl UIToolkitDemo {
         Self::default()
     }
 }
-
 
 #[derive(Debug, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
@@ -38,18 +37,7 @@ impl Default for Enum {
         Self::First
     }
 }
-pub struct WidgetGallery {
-    enabled: bool,
-    visible: bool,
-    boolean: bool,
-    radio: Enum,
-    scalar: f32,
-    string: String,
-    color: egui::Color32,
-    animate_progress_bar: bool,
-}
-
-impl Default for WidgetGallery {
+impl Default for UIToolkitDemo {
     fn default() -> Self {
         Self {
             enabled: true,
@@ -60,12 +48,13 @@ impl Default for WidgetGallery {
             string: Default::default(),
             color: egui::Color32::LIGHT_BLUE.linear_multiply(0.5),
             animate_progress_bar: true,
+            text_input: "".to_string(),
         }
     }
 }
 
 fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget + 'a {
-    // hyperlink label helper function
+    // hyperlink label helper function (labels the )
     let label = format!("{}:", title);
     let url = format!("https://docs.rs/egui?search={}", search_term);
     move |ui: &mut egui::Ui| {
@@ -78,7 +67,7 @@ fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget
     }
 }
 impl eframe::App for UIToolkitDemo {
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) { // updates every frame 
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
             ui.heading("AvdanOS UI Toolkit Demo");
             ui.end_row();
