@@ -6,11 +6,10 @@ use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 pub struct UIToolkitDemo{
-    enabled: bool,
-    visible: bool,
     boolean: bool, // for checklists (true and false)
     radio: Enum, // radio button options (Enum)
-    scalar: f32, // fraction from the whole in the ProgressBar and Slider (out of 100%, 360°)
+    scalar: f32, /* fraction from the whole in the ProgressBar and Slider (out of 100%, 360°). also it allows the DragValue, Slider, and 
+    ProgressBar values to be synced*/
     color: egui::Color32, // current color for the ColorPicker
     animate_progress_bar: bool, 
     text_input:String, // current text input from the user in the TextInput field
@@ -24,23 +23,19 @@ impl UIToolkitDemo {
 }
 
 #[derive(Debug, PartialEq)]
-#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 enum Enum {
     First,
     Second,
     Third,
 }
-
-impl Default for Enum {
+impl Default for Enum { // default implementation for the Enum (instead of using the derive macro)
     fn default() -> Self {
         Self::First
     }
 }
-impl Default for UIToolkitDemo {
+impl Default for UIToolkitDemo { // default implementation for the UIToolkitDemo struct
     fn default() -> Self {
         Self {
-            enabled: true,
-            visible: true,
             boolean: false,
             radio: Enum::First,
             scalar: 42.0,
@@ -52,7 +47,7 @@ impl Default for UIToolkitDemo {
 }
 
 fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget + 'a {
-    // hyperlink label helper function (labels the )
+    // hyperlink label helper function (creates hoverable hyperlinks for labels)
     let label = format!("{}:", title);
     let url = format!("https://docs.rs/egui?search={}", search_term);
     move |ui: &mut egui::Ui| {
@@ -64,7 +59,7 @@ fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget
         })
     }
 }
-impl eframe::App for UIToolkitDemo {
+impl eframe::App for UIToolkitDemo { // the actual UI 
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) { // updates every frame 
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
             ui.heading("AvdanOS UI Toolkit Demo");
@@ -93,7 +88,7 @@ impl eframe::App for UIToolkitDemo {
                 if ui.add(egui::Button::new("Light mode!")).clicked() {
                     ctx.set_visuals(egui::Visuals::light());
                 }
-            }); // buttons
+            });
 
             // Text input box
             ui.add(egui::TextEdit::singleline(&mut self.text_input).hint_text("Write something here"));
@@ -111,12 +106,12 @@ impl eframe::App for UIToolkitDemo {
             
             // Progress Bar
             ui.add(doc_link_label("ProgressBar", "ProgressBar"));
-            let progress = self.scalar / 360.0;
-            let progress_bar = egui::ProgressBar::new(progress)
+            let progress = self.scalar / 360.0; // the progress here is a literal fraction of the whole (scalar divided by total)
+            let progress_bar = egui::ProgressBar::new(progress) 
                 .show_percentage()
                 .animate(self.animate_progress_bar);
             
-            self.animate_progress_bar = ui
+            self.animate_progress_bar = ui // this is the actual ProgressBar UI element
                 .add(progress_bar)
                 .on_hover_text("The progress bar can be animated!")
                 .hovered();
@@ -142,7 +137,7 @@ impl eframe::App for UIToolkitDemo {
             ui.end_row();
 
             // Selectable Label
-            ui.add(doc_link_label(
+            ui.add(doc_link_label( // the hyperlink components for the SelectableLabel
                 "SelectableLabel",
                 "selectable_value, SelectableLabel",
             ));
@@ -157,7 +152,7 @@ impl eframe::App for UIToolkitDemo {
             ui.add(doc_link_label("ComboBox", "ComboBox"));
             egui::ComboBox::from_label("Take your pick")
                 .selected_text(format!("{:?}", &mut self.radio))
-                .show_ui(ui, |ui| {
+                .show_ui(ui, |ui| { // the actual ComboBox with the 3 selectable values
                     ui.selectable_value(&mut self.radio, Enum::First, "First");
                     ui.selectable_value(&mut self.radio, Enum::Second, "Second");
                     ui.selectable_value(&mut self.radio, Enum::Third, "Third");
@@ -168,7 +163,7 @@ impl eframe::App for UIToolkitDemo {
             ui.add(doc_link_label("CollapsingHeader", "collapsing"));
             ui.collapsing("Click to see what is hidden!", |ui| {
                 ui.horizontal_wrapped(|ui| {
-                    ui.spacing_mut().item_spacing.x = 0.0;
+                    ui.spacing_mut().item_spacing.x = 0.0; // disables item spacing that is enabled by default
                     ui.label("It's a ");
                     ui.add(doc_link_label("Spinner ! ", "spinner"));
                     ui.add_space(4.0);
