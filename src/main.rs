@@ -1,7 +1,7 @@
 use eframe::*;
 use toolkit::UIToolkitDemo;
 
-mod fonts; // fonts file
+mod fonts;   // fonts file
 mod toolkit; // the actual app code
 
 pub(crate) fn main() {
