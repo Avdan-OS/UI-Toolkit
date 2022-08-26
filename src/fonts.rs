@@ -1,4 +1,7 @@
-pub(crate) use eframe::egui::{self, FontDefinitions};
+pub(crate) use eframe::egui::{
+    FontDefinitions,
+    self,
+};
 
 pub fn setup_font(ctx: &egui::Context) {
     let mut font: FontDefinitions = egui::FontDefinitions::default();
@@ -20,5 +23,5 @@ pub fn setup_font(ctx: &egui::Context) {
         .or_default()
         .push("inter".to_owned());
 
-    ctx.set_fonts(font);
+    ctx.set_fonts(font); // sets inter the default font
 }
