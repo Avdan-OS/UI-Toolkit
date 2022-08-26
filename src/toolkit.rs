@@ -8,13 +8,12 @@ use crate::fonts::setup_font;
 pub struct UIToolkitDemo{
     enabled: bool,
     visible: bool,
-    boolean: bool,
-    radio: Enum,
-    scalar: f32,
-    string: String,
-    color: egui::Color32,
-    animate_progress_bar: bool,
-    text_input:String, 
+    boolean: bool, // for checklists (true and false)
+    radio: Enum, // radio button options (Enum)
+    scalar: f32, // fraction from the whole in the ProgressBar and Slider (out of 100%, 360°)
+    color: egui::Color32, // current color for the ColorPicker
+    animate_progress_bar: bool, 
+    text_input:String, // current text input from the user in the TextInput field
 }
 
 impl UIToolkitDemo {
@@ -45,7 +44,6 @@ impl Default for UIToolkitDemo {
             boolean: false,
             radio: Enum::First,
             scalar: 42.0,
-            string: Default::default(),
             color: egui::Color32::LIGHT_BLUE.linear_multiply(0.5),
             animate_progress_bar: true,
             text_input: "".to_string(),
