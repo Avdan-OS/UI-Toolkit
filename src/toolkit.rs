@@ -1,23 +1,24 @@
-use eframe::egui::{self};
-use eframe::egui::special_emojis::GITHUB;
+use eframe::egui::{
+    self,
+    special_emojis::GITHUB,
+};
 
 use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 pub struct UIToolkitDemo {
-    boolean: bool, // for checklists (true and false)
-    radio: SelectableOptions, /* radio button options (Enum). similarly to scalar it also syncs the values for the 
-    RadioButton, SelectableLabel, and the ComboBox.*/
-    scalar: f32, /* fraction from the whole in the ProgressBar and Slider (out of 100%, 360°). also it allows the DragValue, Slider, and 
-    ProgressBar values to be synced.*/
-    color: egui::Color32, // current color for the ColorPicker
+    boolean: bool,            // for checklists (true and false)
+    radio: SelectableOptions, /* radio button options (Enum). similarly to scalar it also syncs the values for the  RadioButton, SelectableLabel, and the ComboBox.*/
+    scalar: f32,              /* fraction from the whole in the ProgressBar and Slider (out of 100%, 360°). also it allows the DragValue, Slider, and ProgressBar values to be synced.*/
+    color: egui::Color32,     // current color for the ColorPicker
     animate_progress_bar: bool, 
-    text_input:String, // current text input from the user in the TextInput field
+    text_input:String,        // current text input from the user in the TextInput field
 }
 
 impl UIToolkitDemo {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         setup_font(&cc.egui_ctx);
+        
         Self::default()
     }
 }
@@ -28,19 +29,22 @@ enum SelectableOptions {
     Second,
     Third,
 }
-impl Default for SelectableOptions { // default implementation for the Enum (instead of using the derive macro)
+
+// default implementation for the Enum (instead of using the derive macro)
+impl Default for SelectableOptions {
     fn default() -> Self {
         Self::First
     }
 }
 
-impl Default for UIToolkitDemo { // default implementation for the UIToolkitDemo struct
+// default implementation for the UIToolkitDemo struct
+impl Default for UIToolkitDemo {
     fn default() -> Self {
         Self {
             boolean: false,
-            radio: SelectableOptions::First,
-            scalar: 42.0,
-            color: egui::Color32::LIGHT_BLUE.linear_multiply(0.5),
+            radio:   SelectableOptions::First,
+            scalar:  42.0,
+            color:   egui::Color32::LIGHT_BLUE.linear_multiply(0.5),
             animate_progress_bar: true,
             text_input: "".to_string(),
         }
@@ -49,29 +53,33 @@ impl Default for UIToolkitDemo { // default implementation for the UIToolkitDemo
 
 fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget + 'a {
     // hyperlink label helper function (creates hoverable hyperlinks for labels)
-    let label = format!("{}:", title);
-    let url = format!("https://docs.rs/egui?search={}", search_term);
+    let label = format!("{title}:");
+    let url = format!("https://docs.rs/egui?search={search_term}");
+    
     move |ui: &mut egui::Ui| {
         ui.hyperlink_to(label, url).on_hover_ui(|ui| {
-            ui.horizontal_wrapped(|ui| {
+            ui.horizontal_wrapped(|ui: &mut egui::Ui| {
                 ui.label("Search egui docs for");
                 ui.code(search_term);
             });
         })
     }
 }
-impl eframe::App for UIToolkitDemo { // the actual UI 
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) { // updates every frame 
+
+// the actual UI 
+impl eframe::App for UIToolkitDemo {
+    // updates every frame
+    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) { 
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
             ui.heading("AvdanOS UI Toolkit Demo");
             ui.end_row();
             
-            ui.hyperlink_to(
+            ui.hyperlink_to (
                 format!("{} Check us out on GitHub !", GITHUB),
                 "https://github.com/Avdan-OS",
             );
             
-            ui.vertical_centered(|ui| {
+            ui.vertical_centered(|ui: &mut Ui| {
                 let tooltip_text = "The full egui documentation.\nYou can also click the different widgets names in the left column.";
                 ui.hyperlink("https://docs.rs/egui/").on_hover_text(tooltip_text);
             });
@@ -80,7 +88,7 @@ impl eframe::App for UIToolkitDemo { // the actual UI
             ui.end_row();
 
             // light mode and dark mode buttons
-            ui.horizontal(|ui| { 
+            ui.horizontal(|ui: &mut Ui| { 
                 ui.label("Dark mode or Light mode ?!");
 
                 if ui.add(egui::Button::new("Dark mode!")).clicked() {
