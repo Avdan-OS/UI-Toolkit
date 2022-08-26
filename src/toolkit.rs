@@ -4,7 +4,7 @@ use eframe::egui::special_emojis::GITHUB;
 use crate::egui::Ui;
 use crate::fonts::setup_font;
 
-pub struct UIToolkitDemo{
+pub struct UIToolkitDemo {
     boolean: bool, // for checklists (true and false)
     radio: SelectableOptions, /* radio button options (Enum). similarly to scalar it also syncs the values for the 
     RadioButton, SelectableLabel, and the ComboBox.*/
