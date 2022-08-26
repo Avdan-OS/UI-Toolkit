@@ -4,6 +4,7 @@ AvdanOS UI Toolkit made with Rust using the eGUI Library.
 `https://github.com/emilk/egui`
 
 The eGUI Widgets that have been shown in this little demo are :
+
 - Labels
 - Buttons
 - Separators
@@ -18,6 +19,8 @@ The eGUI Widgets that have been shown in this little demo are :
 - Selectable Labels
 - ComboBoxes
 - Collapsing Headers + a Spinner
+
+There are also many synced values and widgets. Using the "scalar" value, the Slider, DragValue, and the ProgressBar are synced (they have the same value across the different widgets). Similarly, using the "radio" value, the CheckBox, the SelectableLabel, and the RadioButtons are also synced.
 
 ## Screenshots
 

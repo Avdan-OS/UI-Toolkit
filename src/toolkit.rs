@@ -1,4 +1,4 @@
-use eframe::egui::{self, Response, Widget};
+use eframe::egui::{self};
 use eframe::egui::special_emojis::GITHUB;
 
 use crate::egui::Ui;
@@ -6,7 +6,7 @@ use crate::fonts::setup_font;
 
 pub struct UIToolkitDemo{
     boolean: bool, // for checklists (true and false)
-    radio: Enum, /* radio button options (Enum). similarly to scalar it also syncs the values for the 
+    radio: SelectableOptions, /* radio button options (Enum). similarly to scalar it also syncs the values for the 
     RadioButton, SelectableLabel, and the ComboBox.*/
     scalar: f32, /* fraction from the whole in the ProgressBar and Slider (out of 100%, 360°). also it allows the DragValue, Slider, and 
     ProgressBar values to be synced.*/
@@ -23,12 +23,12 @@ impl UIToolkitDemo {
 }
 
 #[derive(Debug, PartialEq)]
-enum Enum {
+enum SelectableOptions {
     First,
     Second,
     Third,
 }
-impl Default for Enum { // default implementation for the Enum (instead of using the derive macro)
+impl Default for SelectableOptions { // default implementation for the Enum (instead of using the derive macro)
     fn default() -> Self {
         Self::First
     }
@@ -38,7 +38,7 @@ impl Default for UIToolkitDemo { // default implementation for the UIToolkitDemo
     fn default() -> Self {
         Self {
             boolean: false,
-            radio: Enum::First,
+            radio: SelectableOptions::First,
             scalar: 42.0,
             color: egui::Color32::LIGHT_BLUE.linear_multiply(0.5),
             animate_progress_bar: true,
@@ -131,9 +131,9 @@ impl eframe::App for UIToolkitDemo { // the actual UI
             // Radio Button 
             ui.add(doc_link_label("RadioButton", "radio"));
             ui.horizontal(|ui| {
-                ui.radio_value(&mut self.radio, Enum::First, "First");
-                ui.radio_value(&mut self.radio, Enum::Second, "Second");
-                ui.radio_value(&mut self.radio, Enum::Third, "Third");
+                ui.radio_value(&mut self.radio, SelectableOptions::First, "First");
+                ui.radio_value(&mut self.radio, SelectableOptions::Second, "Second");
+                ui.radio_value(&mut self.radio, SelectableOptions::Third, "Third");
             });
             ui.end_row();
 
@@ -143,9 +143,9 @@ impl eframe::App for UIToolkitDemo { // the actual UI
                 "selectable_value, SelectableLabel",
             ));
             ui.horizontal(|ui| {
-                ui.selectable_value(&mut self.radio, Enum::First, "First");
-                ui.selectable_value(&mut self.radio, Enum::Second, "Second");
-                ui.selectable_value(&mut self.radio, Enum::Third, "Third");
+                ui.selectable_value(&mut self.radio, SelectableOptions::First, "First");
+                ui.selectable_value(&mut self.radio, SelectableOptions::Second, "Second");
+                ui.selectable_value(&mut self.radio, SelectableOptions::Third, "Third");
             });
             ui.end_row();
             
@@ -154,9 +154,9 @@ impl eframe::App for UIToolkitDemo { // the actual UI
             egui::ComboBox::from_label("Take your pick")
                 .selected_text(format!("{:?}", &mut self.radio))
                 .show_ui(ui, |ui| { // the actual ComboBox with the 3 selectable values
-                    ui.selectable_value(&mut self.radio, Enum::First, "First");
-                    ui.selectable_value(&mut self.radio, Enum::Second, "Second");
-                    ui.selectable_value(&mut self.radio, Enum::Third, "Third");
+                    ui.selectable_value(&mut self.radio, SelectableOptions::First, "First");
+                    ui.selectable_value(&mut self.radio, SelectableOptions::Second, "Second");
+                    ui.selectable_value(&mut self.radio, SelectableOptions::Third, "Third");
                 });
             ui.end_row();
 
