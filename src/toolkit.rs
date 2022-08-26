@@ -1,15 +1,15 @@
 use eframe::egui::{self, Response, Widget};
 use eframe::egui::special_emojis::GITHUB;
-use eframe::egui::style::WidgetVisuals;
 
 use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 pub struct UIToolkitDemo{
     boolean: bool, // for checklists (true and false)
-    radio: Enum, // radio button options (Enum)
+    radio: Enum, /* radio button options (Enum). similarly to scalar it also syncs the values for the 
+    RadioButton, SelectableLabel, and the ComboBox.*/
     scalar: f32, /* fraction from the whole in the ProgressBar and Slider (out of 100%, 360°). also it allows the DragValue, Slider, and 
-    ProgressBar values to be synced*/
+    ProgressBar values to be synced.*/
     color: egui::Color32, // current color for the ColorPicker
     animate_progress_bar: bool, 
     text_input:String, // current text input from the user in the TextInput field
@@ -33,6 +33,7 @@ impl Default for Enum { // default implementation for the Enum (instead of using
         Self::First
     }
 }
+
 impl Default for UIToolkitDemo { // default implementation for the UIToolkitDemo struct
     fn default() -> Self {
         Self {
