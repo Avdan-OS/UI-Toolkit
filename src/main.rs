@@ -1,11 +1,10 @@
-#![allow(unused_imports)]
 use eframe::*;
 use toolkit::UIToolkitDemo;
 
-mod fonts;
-mod toolkit;
+mod fonts;   // fonts file
+mod toolkit; // the actual app code
 
-fn main() {
+pub(crate) fn main() {
     let native_options: NativeOptions = eframe::NativeOptions::default();
 
     eframe::run_native (
