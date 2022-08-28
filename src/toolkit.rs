@@ -7,12 +7,12 @@ use crate::egui::Ui;
 use crate::fonts::setup_font;
 
 pub struct UIToolkitDemo {
-    boolean: bool,            // for checklists (true and false)
-    radio: SelectableOptions, /* radio button options (Enum). similarly to scalar it also syncs the values for the  RadioButton, SelectableLabel, and the ComboBox.*/
-    scalar: f32,              /* fraction from the whole in the ProgressBar and Slider (out of 100%, 360°). also it allows the DragValue, Slider, and ProgressBar values to be synced.*/
-    color: egui::Color32,     // current color for the ColorPicker
+    boolean: bool,            // For checklists (true and false).
+    radio: SelectableOptions, // Radio button options (Enum). similarly to scalar it also syncs the values for the  RadioButton, SelectableLabel, and the ComboBox.
+    scalar: f32,              // Fraction from the whole in the ProgressBar and Slider (out of 100%, 360°). also it allows the DragValue, Slider, and ProgressBar values to be synced.
+    color: egui::Color32,     // Current color for the ColorPicker.
     animate_progress_bar: bool, 
-    text_input:String,        // current text input from the user in the TextInput field
+    text_input:String,        // Current text input from the user in the TextInput field.
 }
 
 impl UIToolkitDemo {
@@ -30,14 +30,14 @@ enum SelectableOptions {
     Third,
 }
 
-// default implementation for the Enum (instead of using the derive macro)
+// Default implementation for the Enum (instead of using the derive macro).
 impl Default for SelectableOptions {
     fn default() -> Self {
         Self::First
     }
 }
 
-// default implementation for the UIToolkitDemo struct
+// Default implementation for the UIToolkitDemo struct.
 impl Default for UIToolkitDemo {
     fn default() -> Self {
         Self {
@@ -52,7 +52,7 @@ impl Default for UIToolkitDemo {
 }
 
 fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget + 'a {
-    // hyperlink label helper function (creates hoverable hyperlinks for labels)
+    // Hyperlink label helper function (creates hoverable hyperlinks for labels).
     let label = format!("{title}:");
     let url = format!("https://docs.rs/egui?search={search_term}");
     
@@ -66,9 +66,9 @@ fn doc_link_label<'a>(title: &'a str, search_term: &'a str) -> impl egui::Widget
     }
 }
 
-// the actual UI 
+// The actual demo.
 impl eframe::App for UIToolkitDemo {
-    // updates every frame
+    // Updates every frame.
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) { 
         egui::CentralPanel::default().show(ctx, |ui: &mut Ui| {
             ui.heading("AvdanOS UI Toolkit Demo");
@@ -87,7 +87,7 @@ impl eframe::App for UIToolkitDemo {
             ui.separator();
             ui.end_row();
 
-            // light mode and dark mode buttons
+            // Light mode and dark mode buttons.
             ui.horizontal(|ui: &mut Ui| { 
                 ui.label("Dark mode or Light mode ?!");
 
@@ -99,44 +99,45 @@ impl eframe::App for UIToolkitDemo {
                 }
             });
 
-            // Text input box
+            // Text input box.
             ui.add(egui::TextEdit::singleline(&mut self.text_input).hint_text("Write something here"));
             ui.end_row();
             
-            // Slider 
+            // Slider.
             ui.add(doc_link_label("Slider", "Slider"));
             ui.add(egui::Slider::new(&mut self.scalar, 0.0..=360.0).suffix("°"));
             ui.end_row();
             
-            // Drag Value
+            // Drag Value.
             ui.add(doc_link_label("DragValue", "DragValue"));
             ui.add(egui::DragValue::new(&mut self.scalar).speed(1.0));
             ui.end_row();
             
-            // Progress Bar
+            // Progress Bar.
             ui.add(doc_link_label("ProgressBar", "ProgressBar"));
-            let progress = self.scalar / 360.0; // the progress here is a literal fraction of the whole (scalar divided by total)
+            // The progress here is a literal fraction of the whole (scalar divided by total).
+            let progress = self.scalar / 360.0;
             let progress_bar = egui::ProgressBar::new(progress) 
                 .show_percentage()
                 .animate(self.animate_progress_bar);
             
-            self.animate_progress_bar = ui // this is the actual ProgressBar UI element
+            self.animate_progress_bar = ui // The actual ProgressBar UI element.
                 .add(progress_bar)
                 .on_hover_text("The progress bar can be animated!")
                 .hovered();
             ui.end_row();
 
-            // Color Picker
+            // Color Picker.
             ui.add(doc_link_label("Color picker", "color_edit"));
             ui.color_edit_button_srgba(&mut self.color);
             ui.end_row();
 
-            // Checkbox
+            // Checkbox.
             ui.add(doc_link_label("Checkbox", "checkbox"));
             ui.checkbox(&mut self.boolean, "Checkbox");
             ui.end_row();
 
-            // Radio Button 
+            // Radio Button.
             ui.add(doc_link_label("RadioButton", "radio"));
             ui.horizontal(|ui| {
                 ui.radio_value(&mut self.radio, SelectableOptions::First, "First");
@@ -145,34 +146,37 @@ impl eframe::App for UIToolkitDemo {
             });
             ui.end_row();
 
-            // Selectable Label
-            ui.add(doc_link_label( // the hyperlink components for the SelectableLabel
+            // Selectable Label.
+            // The hyperlink components for the SelectableLabel.
+            ui.add(doc_link_label (
                 "SelectableLabel",
                 "selectable_value, SelectableLabel",
             ));
-            ui.horizontal(|ui| {
+            ui.horizontal(|ui: &mut Ui| {
                 ui.selectable_value(&mut self.radio, SelectableOptions::First, "First");
                 ui.selectable_value(&mut self.radio, SelectableOptions::Second, "Second");
                 ui.selectable_value(&mut self.radio, SelectableOptions::Third, "Third");
             });
             ui.end_row();
             
-            // ComboBox
+            // ComboBox.
             ui.add(doc_link_label("ComboBox", "ComboBox"));
             egui::ComboBox::from_label("Take your pick")
                 .selected_text(format!("{:?}", &mut self.radio))
-                .show_ui(ui, |ui| { // the actual ComboBox with the 3 selectable values
+                // The actual ComboBox with the 3 selectable values.
+                .show_ui(ui, |ui: &mut Ui| {
                     ui.selectable_value(&mut self.radio, SelectableOptions::First, "First");
                     ui.selectable_value(&mut self.radio, SelectableOptions::Second, "Second");
                     ui.selectable_value(&mut self.radio, SelectableOptions::Third, "Third");
                 });
             ui.end_row();
 
-            // Collapsing Header + Spinner 
+            // Collapsing Header + Spinner.
             ui.add(doc_link_label("CollapsingHeader", "collapsing"));
-            ui.collapsing("Click to see what is hidden!", |ui| {
-                ui.horizontal_wrapped(|ui| {
-                    ui.spacing_mut().item_spacing.x = 0.0; // disables item spacing that is enabled by default
+            ui.collapsing("Click to see what is hidden!", |ui: &mut Ui| {
+                ui.horizontal_wrapped(|ui: &mut Ui| {
+                    // Disables item spacing that is enabled by default.
+                    ui.spacing_mut().item_spacing.x = 0.0;
                     ui.label("It's a ");
                     ui.add(doc_link_label("Spinner ! ", "spinner"));
                     ui.add_space(4.0);
