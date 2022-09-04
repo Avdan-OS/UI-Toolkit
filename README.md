@@ -40,9 +40,13 @@ On debian-based linux distros run this command on the terminal:
 
 ```sudo apt-get install -y libclang-dev libgtk-3-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libspeechd-dev libxkbcommon-dev libssl-dev```
 
-Meanwhile on Fedora-based distros, you need to run this command:
+On Fedora-based distros, you need to run this command:
 
 ```sudo dnf install clang clang-devel clang-tools-extra speech-dispatcher-devel libxkbcommon-devel pkg-config openssl-devel libxcb-devel```
+
+Meanwhile on Arch-based distros, you run this command:
+
+```sudo dnf install clang clang-tools-extra speech-dispatcher libxkbcommon pkg-config openssl libxcb```
 
 ### Step 2: Building and running
 
