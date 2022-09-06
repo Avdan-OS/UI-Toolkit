@@ -46,7 +46,7 @@ On Fedora-based distros, you need to run this command:
 
 Meanwhile on Arch-based distros, you run this command:
 
-```sudo dnf install clang clang-tools-extra speech-dispatcher libxkbcommon pkg-config openssl libxcb```
+```sudo pacman -S install clang clang-tools-extra speech-dispatcher libxkbcommon pkg-config openssl libxcb```
 
 ### Step 2: Building and running
 
