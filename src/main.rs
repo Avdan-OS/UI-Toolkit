@@ -3,7 +3,9 @@
 use iced::widget::{
     column,
     container,
-    text
+    radio,
+    row,
+    text,
 };
 
 use iced::{
@@ -12,6 +14,11 @@ use iced::{
     Length,
     Sandbox,
     Settings
+};
+
+use iced::theme::{
+    self,
+    Theme
 };
 
 mod fonts;
@@ -32,18 +39,28 @@ pub fn main() -> iced::Result {
     Toolkit::run(Settings::default()) // run program
 }
 
-struct Toolkit {}
+struct Toolkit {
+    theme: Theme
+}
+
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+enum UITheme {
+    Light,
+    Dark
+}
 
 // interactions
 #[derive(Debug, Clone, Copy)]
-enum Message {}
+enum Message {
+    ThemeChanged(UITheme)
+}
 
 impl Sandbox for Toolkit {
     type Message = Message;
 
     // store interactions
     fn new() -> Self {
-        Self {}
+        Toolkit { theme: Theme::Light }
     }
 
     // window title
@@ -53,7 +70,14 @@ impl Sandbox for Toolkit {
 
     // update state
     fn update(&mut self, message: Message) {
-        match message {}
+        match message {
+            Message::ThemeChanged(theme) => {
+                self.theme = match theme {
+                    UITheme::Light => Theme::Light,
+                    UITheme::Dark  => Theme::Dark
+                }
+            }
+        }
     }
 
     // show things on screen
@@ -61,7 +85,29 @@ impl Sandbox for Toolkit {
         let title = text("AvdanOS UI Toolkit Demo")
             .font(REGULAR);
 
-        let content = column![title]
+        let choose_theme =
+            [UITheme::Light, UITheme::Dark]
+                .iter()
+                .fold (
+                    row![text("Choose a theme:")].spacing(10),
+                    |row, theme| {
+                        row.push(radio (
+                            format!("{theme:?}"),
+                            *theme,
+                            Some(match self.theme {
+                                Theme::Light => UITheme::Light,
+                                Theme::Dark  => UITheme::Dark,
+                                Theme::Custom(..) => todo!()
+                            }),
+                            Message::ThemeChanged)
+                        )
+                    });
+
+        let content = column![
+            title,
+            choose_theme
+        ]
+            .spacing(20)
             .padding(20)
             .align_items(Alignment::Start);
 
@@ -70,5 +116,9 @@ impl Sandbox for Toolkit {
             .height(Length::Fill)
             .padding(20)
             .into()
+    }
+
+    fn theme(&self) -> Theme {
+        self.theme.clone()
     }
 }
